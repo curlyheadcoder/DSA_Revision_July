@@ -23,8 +23,11 @@ public class MaximumSumSubarray {
             arr[i] = sc.nextInt();
         }
 //        int ans = maxSumBrute(arr);
-        int ans1 = maxSumOptimal(arr);
-        System.out.println(ans1);
+//        int ans1 = maxSumOptimal(arr);
+//        System.out.println(ans1);
+
+        int ans2 = maxSumSlidingWindow(arr);
+        System.out.println(ans2);
     }
     private static int maxSumBrute(int [] arr){
         int res = arr[0];
@@ -38,14 +41,22 @@ public class MaximumSumSubarray {
         }
         return res;
     }
-    private static int maxSumOptimal(int [] nums){
-        int n = nums.length;
-        int res = nums[0];
-        int maxEnding = nums[0];
-        for (int i = 1; i < n; i++) {
-            maxEnding = Math.max(maxEnding + nums[i], nums[i]);
-            res = Math.max(res, maxEnding);
+//    private static int maxSumOptimal(int [] nums){
+//        int n = nums.length;
+//        int res = nums[0];
+//        int maxEnding = nums[0];
+//        for (int i = 1; i < n; i++) {
+//            maxEnding = Math.max(maxEnding + nums[i], nums[i]);
+//            res = Math.max(res, maxEnding);
+//        }
+//        return res;
+//    }
+    private static int maxSumSlidingWindow(int []  nums){
+        int maxSum = nums[0], currSum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            currSum = Math.max(nums[i], currSum + nums[i]);
+            maxSum = Math.max(maxSum, currSum);
         }
-        return res;
+        return maxSum;
     }
 }
